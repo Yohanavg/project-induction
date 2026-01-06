@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PokemonService } from './pokemon.service';
-import { CreatePokemonDto } from 'src/dto/create-pokemon.dto';
+import { CreatePokemonDto } from 'src/pokemon/dto/create-pokemon.dto';
 
 @Controller('pokemon')
 export class PokemonController {
@@ -12,7 +12,7 @@ export class PokemonController {
     }
 
     @Post()
-    async create(@Body() CreatePokemonDto){
+    async create(@Body() CreatePokemonDto: CreatePokemonDto){
         return await this.pokemonService.create(CreatePokemonDto) //Post
     }
 

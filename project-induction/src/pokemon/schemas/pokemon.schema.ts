@@ -5,7 +5,7 @@ export type PokemonDocument = Pokemon & Document;
 
 @Schema({ collection: 'pokemons' })
 export class Stats {
-  @Prop({ required: true })
+  @Prop()
   life: number;
 
   @Prop({ required: true })
