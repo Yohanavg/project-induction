@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Pokemon, PokemonDocument } from './schemas/pokemon.schema';
-import { CreatePokemonDto } from 'src/pokemon/dto/create-pokemon.dto';
+
 
 @Injectable()
 export class PokemonRepositoryService {
@@ -18,11 +18,11 @@ export class PokemonRepositoryService {
       }
     
       // 3. Cambia create para que guarde en MongoDB
-      async create(createPokemonDto: CreatePokemonDto) {
-        console.log('Creating Pokemon in DB:', createPokemonDto);
-        const nuevoPokemon = new this.pokemonModel(createPokemonDto);
+      async create(pokemon: any) {
+        const nuevoPokemon = new this.pokemonModel(pokemon);
         return await nuevoPokemon.save();
-      } 
+      }
+
     
       // 4. Cambia findOne para buscar por nombre en la BD
       async findOne(name: string) {

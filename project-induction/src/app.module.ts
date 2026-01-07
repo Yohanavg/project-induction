@@ -1,10 +1,22 @@
 import { Module } from '@nestjs/common';
 import { PokemonModule } from './pokemon/pokemon.module';
 import {MongooseModule} from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://aleicer_vesga:jCCGGQb0uGKp26dP@iudigitaldb.w7v4d.mongodb.net/film-iudigital'),
+  imports: [
+    ConfigModule.forRoot({
+        isGlobal: true,
+      }),
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        uri: configService.get<string>('MONGO_URI'),
+      }),
+    }),
     PokemonModule,
+    StatsModule,
   ],
   controllers: [],
   providers: [],

@@ -1,19 +1,7 @@
-import {IsString, IsNumber,IsObject} from 'class-validator'
+import { Type } from 'class-transformer';
+import {IsString, ValidateNested} from 'class-validator'
+import { CreateStatsDto } from 'src/stats/stats.dto';
 
-
-export class StatsDto {
-    @IsNumber()
-    life: number;
-
-    @IsNumber()
-    attack: number;
-
-    @IsNumber()
-    defense: number;
-
-    @IsNumber()
-    speed: number
-}
 
 export class CreatePokemonDto {
     @IsString()   
@@ -22,6 +10,7 @@ export class CreatePokemonDto {
     @IsString()    
     type: string;
 
-    @IsObject()   
-     stats: StatsDto;
+    @ValidateNested()   
+    @Type(() => CreateStatsDto)
+     stats: CreateStatsDto;
 }

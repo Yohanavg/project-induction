@@ -1,33 +1,23 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type PokemonDocument = Pokemon & Document;
 
-@Schema({ collection: 'pokemons' })
-export class Stats {
-  @Prop()
-  life: number;
-
-  @Prop({ required: true })
-  attack: number;
-
-  @Prop({ required: true })
-  defense: number;
-
-  @Prop({ required: true })
-  speed: number;
-}
-
-@Schema()
+@Schema({ collection: 'pokemons', timestamps: true })
 export class Pokemon {
+
   @Prop({ required: true })
   name: string;
 
   @Prop({ required: true })
   type: string;
 
-  @Prop({ type: Stats, required: true })
-  stats: Stats;
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'Stats',
+    required: true,
+  })
+  stats: Types.ObjectId;
 }
 
 export const PokemonSchema = SchemaFactory.createForClass(Pokemon);
