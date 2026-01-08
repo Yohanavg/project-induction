@@ -1,41 +1,50 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePokemonDto } from 'src/pokemon/dto/create-pokemon.dto';
-
+import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { PokemonRepositoryService } from './pokemonRepository.service';
 import { StatsRepository } from 'src/stats/stats.repository';
+import { PokemonDocument } from './schemas/pokemon.schema';
+import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 
 @Injectable()
 export class PokemonService {
-  
+
   constructor(
     private readonly pokemonRepository: PokemonRepositoryService,
     private readonly statsRepository: StatsRepository
   ) {}
 
-
-  async findAll() {
-    return await this.pokemonRepository.findAll();
-  }
-
-  async create(createPokemonDto: CreatePokemonDto) {
-  const stats = await this.statsRepository.create(
-    createPokemonDto.stats,  //Crear stats primero
-  );
-  const pokemon = {
-    name: createPokemonDto.name.toLowerCase(),
-    type: createPokemonDto.type.toUpperCase(),
-    stats: stats._id,  //Crear pokemon con referencia de stats
-  };
-  return await this.pokemonRepository.create(pokemon);
-}
-
-
-  async findOne(name: string) {
-    return await this.pokemonRepository.findOne(name); //Cambia findOne para buscar por nombre en la BD
+  
+  async findAll(): Promise<PokemonDocument[]> {
+    return this.pokemonRepository.findAll(); 
   }
 
  
-  async remove(name: string) {
-    return await this.pokemonRepository.remove(name);  //Cambia remove para borrar de la BD
+  async create(createPokemonDto: CreatePokemonDto): Promise<PokemonDocument> {
+    
+    const stats = await this.statsRepository.create(createPokemonDto.stats);
+
+
+    const pokemon = {
+      name: createPokemonDto.name.toLowerCase(),
+      type: createPokemonDto.type.toUpperCase(),
+      stats: stats._id,
+    };
+
+   
+    return this.pokemonRepository.create(pokemon);
+  }
+
+
+  async findOne(name: string): Promise<PokemonDocument | null> {
+    return this.pokemonRepository.findOne(name); // populate ya está en el repository
+  }
+
+
+  async remove(name: string): Promise<PokemonDocument | null> {
+    return this.pokemonRepository.remove(name);
+  }
+
+  async update(name: string, updatePokemonDto: UpdatePokemonDto): Promise<PokemonDocument | null> {
+    return this.pokemonRepository.update(name, updatePokemonDto);
   }
 }

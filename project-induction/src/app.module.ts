@@ -3,6 +3,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
 import {MongooseModule} from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StatsModule } from './stats/stats.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { StatsModule } from './stats/stats.module';
     }),
     PokemonModule,
     StatsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

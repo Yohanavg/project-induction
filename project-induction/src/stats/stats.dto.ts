@@ -1,15 +1,20 @@
-import { IsNumber } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsInt } from 'class-validator';
 
 export class CreateStatsDto {
-  @IsNumber()
+  @ApiProperty({ example: 100 })
+  @IsInt()
   life: number;
 
-  @IsNumber()
+  @ApiProperty({ example: 55 })
+  @IsInt()
   attack: number;
 
-  @IsNumber()
+  @ApiProperty({ example: 40 })
+  @IsInt()
   defense: number;
 
-  @IsNumber()
+  @ApiProperty({ example: 90 })
+  @IsInt()
   speed: number;
 }

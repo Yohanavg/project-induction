@@ -1,16 +1,28 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import {IsString, ValidateNested} from 'class-validator'
+import { IsString, ValidateNested } from 'class-validator';
 import { CreateStatsDto } from 'src/stats/stats.dto';
 
-
 export class CreatePokemonDto {
-    @IsString()   
-    name: string;
+  @ApiProperty({
+    description: 'Pokemon name',
+    example: 'pikachu',
+  })
+  @IsString()
+  name: string;
 
-    @IsString()    
-    type: string;
+  @ApiProperty({
+    description: 'Pokemon type',
+    example: 'ELECTRIC',
+  })
+  @IsString()
+  type: string;
 
-    @ValidateNested()   
-    @Type(() => CreateStatsDto)
-     stats: CreateStatsDto;
+  @ApiProperty({
+    description: 'Pokemon stats',
+    type: CreateStatsDto,
+  })
+  @ValidateNested()
+  @Type(() => CreateStatsDto)
+  stats: CreateStatsDto;
 }
