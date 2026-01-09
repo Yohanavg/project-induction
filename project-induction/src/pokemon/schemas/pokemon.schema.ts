@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
-export type PokemonDocument = Pokemon & Document;
 
 @Schema({ collection: 'pokemons', timestamps: true })
 export class Pokemon {

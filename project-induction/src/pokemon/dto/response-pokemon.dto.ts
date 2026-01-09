@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ResponseStatsDto } from 'src/stats/response-stats.dto';
+import { ResponseStatsDto } from 'src/stats/dto/response-stats.dto';
 
 export class ResponsePokemonDto {
   @ApiProperty()

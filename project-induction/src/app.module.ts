@@ -4,6 +4,7 @@ import {MongooseModule} from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StatsModule } from './stats/stats.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
     PokemonModule,
     StatsModule,
     AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

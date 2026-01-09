@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsString, ValidateNested } from 'class-validator';
-import { CreateStatsDto } from 'src/stats/stats.dto';
+import { CreateStatsDto } from 'src/stats/dto/create-stats.dto';
 
 export class CreatePokemonDto {
   @ApiProperty({

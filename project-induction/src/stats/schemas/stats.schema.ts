@@ -1,10 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
 
-export type StatsDocument = Stats & Document;
 
 @Schema({ timestamps: true })
 export class Stats {
+
   @Prop({ required: true })
   life: number;
 

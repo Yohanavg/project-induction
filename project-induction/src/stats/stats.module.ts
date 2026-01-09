@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { Stats, StatsSchema } from './stats.schema';
-import { StatsRepository } from './stats.repository';
+import { Stats, StatsSchema } from './schemas/stats.schema';
+import { StatsRepository } from './statsRepository.service';
 
 @Module({
   imports: [
@@ -10,7 +10,7 @@ import { StatsRepository } from './stats.repository';
       { name: Stats.name, schema: StatsSchema },
     ]),
   ],
-  providers: [StatsRepository],  
-  exports: [StatsRepository],     
+  providers: [StatsRepository],
+  exports: [StatsRepository],
 })
-export class StatsModule {}
+export class StatsModule { }

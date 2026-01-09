@@ -7,6 +7,6 @@ export class AuthController {
 
     @Post('login')
     login(@Body() body: {id:string, name: string}) {
-        return this.authService.login(body);
+        return this.authService.generateToken({sub: body.id, email: body.name, name: body.name});
     }
 }

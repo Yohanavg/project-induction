@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { Stats } from 'src/stats/stats.interface';
+import { Stats } from 'src/stats/interfaces/stats.interface';
 
 
 export interface PokemonInterface {

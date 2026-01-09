@@ -1,50 +1,42 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
-import { PokemonRepositoryService } from './pokemonRepository.service';
-import { StatsRepository } from 'src/stats/stats.repository';
-import { PokemonDocument } from './schemas/pokemon.schema';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { PokemonRepositoryService } from './pokemonRepository.service';
+import { StatsRepository } from 'src/stats/statsRepository.service';
+import { PokemonInterface } from './interfaces/pokemon.interfaces';
 
 @Injectable()
 export class PokemonService {
-
   constructor(
     private readonly pokemonRepository: PokemonRepositoryService,
     private readonly statsRepository: StatsRepository
-  ) {}
+  ) { }
 
-  
-  async findAll(): Promise<PokemonDocument[]> {
-    return this.pokemonRepository.findAll(); 
+  async findAll(): Promise<PokemonInterface[]> {
+    return this.pokemonRepository.findAll();
   }
 
- 
-  async create(createPokemonDto: CreatePokemonDto): Promise<PokemonDocument> {
-    
+  async create(createPokemonDto: CreatePokemonDto): Promise<PokemonInterface> {
     const stats = await this.statsRepository.create(createPokemonDto.stats);
 
-
-    const pokemon = {
+    const pokemon : PokemonInterface = {
       name: createPokemonDto.name.toLowerCase(),
       type: createPokemonDto.type.toUpperCase(),
-      stats: stats._id,
+      stats:stats._id
     };
 
-   
     return this.pokemonRepository.create(pokemon);
   }
 
-
-  async findOne(name: string): Promise<PokemonDocument | null> {
-    return this.pokemonRepository.findOne(name); // populate ya está en el repository
+  async findOne(name: string): Promise<PokemonInterface | null> {
+    return this.pokemonRepository.findOne(name);
   }
 
-
-  async remove(name: string): Promise<PokemonDocument | null> {
+  async remove(name: string): Promise<PokemonInterface | null> {
     return this.pokemonRepository.remove(name);
   }
 
-  async update(name: string, updatePokemonDto: UpdatePokemonDto): Promise<PokemonDocument | null> {
+  async update(name: string, updatePokemonDto: UpdatePokemonDto): Promise<PokemonInterface | null> {
     return this.pokemonRepository.update(name, updatePokemonDto);
   }
 }

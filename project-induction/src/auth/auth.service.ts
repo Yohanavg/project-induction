@@ -4,13 +4,15 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly jwtService: JwtService) {}
+  constructor(private readonly jwtService: JwtService) { }
 
-    login(user: {id:string, name: string}) {
-        const payLoad = {
-        name: user.name,
+  generateToken(user: { sub: string, email: string, name: string }) {
+    const payLoad = {
+      sub: user.sub,
+      email: user.email,
+      name: user.name,
     };
-    return{
+    return {
       accessToken: this.jwtService.sign(payLoad)
     };
   }
