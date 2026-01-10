@@ -6,11 +6,9 @@ import { StatsRepository } from './statsRepository.service';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Stats.name, schema: StatsSchema },
-    ]),
+    MongooseModule.forFeature([{ name: Stats.name, schema: StatsSchema }]),
   ],
   providers: [StatsRepository],
   exports: [StatsRepository],
 })
-export class StatsModule { }
+export class StatsModule {}

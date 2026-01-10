@@ -1,16 +1,16 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Pokemon} from "./schemas/pokemon.schema";
-import { PokemonInterface} from './interfaces/pokemon.interfaces';
-import { UpdatePokemonDto } from "./dto/update-pokemon.dto";
+import { Pokemon } from './schemas/pokemon.schema';
+import { PokemonInterface } from './interfaces/pokemon.interfaces';
+import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 
 @Injectable()
 export class PokemonRepositoryService {
   constructor(
     @InjectModel(Pokemon.name)
-    private pokemonModel: Model<PokemonInterface>
+    private pokemonModel: Model<PokemonInterface>,
   ) {}
 
   async findAll(): Promise<PokemonInterface[]> {
@@ -30,7 +30,13 @@ export class PokemonRepositoryService {
     return this.pokemonModel.findOneAndDelete({ name }).lean().exec();
   }
 
-  async update(name: string, updatePokemonDto: UpdatePokemonDto): Promise<PokemonInterface | null> {
-  return this.pokemonModel.findOneAndUpdate({ name }, updatePokemonDto, { new: true }).lean().exec();
-}
+  async update(
+    name: string,
+    updatePokemonDto: UpdatePokemonDto,
+  ): Promise<PokemonInterface | null> {
+    return this.pokemonModel
+      .findOneAndUpdate({ name }, updatePokemonDto, { new: true })
+      .lean()
+      .exec();
+  }
 }

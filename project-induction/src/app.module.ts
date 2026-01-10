@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PokemonModule } from './pokemon/pokemon.module';
-import {MongooseModule} from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StatsModule } from './stats/stats.module';
 import { AuthModule } from './auth/auth.module';
@@ -9,8 +9,8 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-        isGlobal: true,
-      }),
+      isGlobal: true,
+    }),
     MongooseModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({

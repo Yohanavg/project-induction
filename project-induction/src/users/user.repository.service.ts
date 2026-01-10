@@ -13,29 +13,24 @@ export class UsersRepository {
     @InjectModel(User.name) private userModel: Model<UserInterface>,
   ) {}
 
-  // Crear usuario (ya llega con password hasheado desde el servicio)
   async create(
     userDto: CreateUserDto,
   ): Promise<Omit<UserInterface, 'password'>> {
     const createdUser = new this.userModel(userDto);
     const savedUser = await createdUser.save();
 
-    // Retornar sin password
     const { password, ...userWithoutPassword } = savedUser.toObject();
     return userWithoutPassword;
   }
 
-  // Buscar todos los usuarios (sin password)
   async findAll(): Promise<Omit<UserInterface, 'password'>[]> {
     return this.userModel.find().select('-password').lean().exec();
   }
 
-  // Buscar por email (incluye password para login)
   async findByEmail(email: string): Promise<UserInterface | null> {
     return this.userModel.findOne({ email }).exec();
   }
 
-  // Buscar por id (sin password)
   async findById(id: string): Promise<Omit<UserInterface, 'password'> | null> {
     const user = await this.userModel
       .findById(id)
@@ -45,7 +40,6 @@ export class UsersRepository {
     return user;
   }
 
-  // Actualizar usuario (sin permitir cambiar password por aquí)
   async update(
     id: string,
     updateUserDto: UpdateUserDto,
@@ -58,7 +52,6 @@ export class UsersRepository {
     return user;
   }
 
-  // Eliminar usuario
   async remove(id: string): Promise<Omit<UserInterface, 'password'> | null> {
     const user = await this.userModel.findByIdAndDelete(id).lean().exec();
     if (!user) return null;

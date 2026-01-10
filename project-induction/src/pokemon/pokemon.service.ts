@@ -9,8 +9,8 @@ import { PokemonInterface } from './interfaces/pokemon.interfaces';
 export class PokemonService {
   constructor(
     private readonly pokemonRepository: PokemonRepositoryService,
-    private readonly statsRepository: StatsRepository
-  ) { }
+    private readonly statsRepository: StatsRepository,
+  ) {}
 
   async findAll(): Promise<PokemonInterface[]> {
     return this.pokemonRepository.findAll();
@@ -19,10 +19,10 @@ export class PokemonService {
   async create(createPokemonDto: CreatePokemonDto): Promise<PokemonInterface> {
     const stats = await this.statsRepository.create(createPokemonDto.stats);
 
-    const pokemon : PokemonInterface = {
+    const pokemon: PokemonInterface = {
       name: createPokemonDto.name.toLowerCase(),
       type: createPokemonDto.type.toUpperCase(),
-      stats:stats._id
+      stats: stats._id,
     };
 
     return this.pokemonRepository.create(pokemon);
@@ -36,7 +36,10 @@ export class PokemonService {
     return this.pokemonRepository.remove(name);
   }
 
-  async update(name: string, updatePokemonDto: UpdatePokemonDto): Promise<PokemonInterface | null> {
+  async update(
+    name: string,
+    updatePokemonDto: UpdatePokemonDto,
+  ): Promise<PokemonInterface | null> {
     return this.pokemonRepository.update(name, updatePokemonDto);
   }
 }

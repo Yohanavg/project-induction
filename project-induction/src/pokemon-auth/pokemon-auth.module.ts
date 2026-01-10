@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthService } from './auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PokemonAuthGuard } from './pokemon-auth.guard';
 
 @Module({
   imports: [
@@ -10,12 +10,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        secret: config.get<string>('JWT_SECRET'),
+        secret: config.get<string>('POKEMON_TOKEN_SECRET'),
         signOptions: { expiresIn: '1h' },
       }),
     }),
   ],
-  providers: [AuthService],
-  exports: [AuthService],
+  providers: [PokemonAuthGuard],
+  exports: [PokemonAuthGuard],
 })
-export class AuthModule {}
+export class PokemonAuthModule {}

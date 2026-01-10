@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  UseGuards,
   Delete,
   Get,
   Param,
@@ -19,6 +20,7 @@ import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { PokemonNameParamDto } from './dto/nameparam-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { PokemonAuthGuard } from '../pokemon-auth/pokemon-auth.guard';
 
 @ApiTags('Pokémon')
 @Controller('pokemon')
@@ -54,6 +56,7 @@ export class PokemonController {
   }
 
   @Post()
+  @UseGuards(PokemonAuthGuard)
   @ApiOperation({ summary: 'Create a new Pokemon' })
   @ApiBody({ type: CreatePokemonDto })
   @ApiResponse({
