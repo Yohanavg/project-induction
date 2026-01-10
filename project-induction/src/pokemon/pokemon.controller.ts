@@ -37,6 +37,11 @@ export class PokemonController {
     return this.pokemonService.findAll();
   }
 
+  @Get('seed')
+  async seed() {
+    return this.pokemonService.seedFromPokeApi();
+  }
+
   @Get(':name')
   @ApiOperation({ summary: 'Get a Pokemon by name' })
   @ApiParam({

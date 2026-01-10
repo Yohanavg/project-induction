@@ -4,7 +4,7 @@ import { Stats } from 'src/stats/interfaces/stats.interface';
 export interface PokemonInterface {
   name: string;
   type: string;
-  stats: Types.ObjectId;
+  stats: Types.ObjectId | Stats;
   createdAt?: Date;
-  updatedAt?: Date,
+  updatedAt?: Date;
 }

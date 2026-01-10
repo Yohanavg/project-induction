@@ -7,12 +7,14 @@ import { PokemonRepositoryService } from './pokemonRepository.service';
 import { Pokemon, PokemonSchema } from './schemas/pokemon.schema';
 import { StatsModule } from 'src/stats/stats.module';
 import { PokemonAuthModule } from '../pokemon-auth/pokemon-auth.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Pokemon.name, schema: PokemonSchema }]),
     StatsModule,
     PokemonAuthModule,
+    HttpModule,
   ],
   controllers: [PokemonController],
   providers: [PokemonService, PokemonRepositoryService],
