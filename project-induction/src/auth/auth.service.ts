@@ -15,4 +15,13 @@ export class AuthService {
       accessToken: this.jwtService.sign(payLoad),
     };
   }
+
+  validateSignedToken(token: string) {
+    try {
+      return this.jwtService.verify(token);
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
 }

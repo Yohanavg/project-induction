@@ -6,21 +6,27 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class PokemonAuthGuard implements CanActivate {
-  constructor(private configService: ConfigService) {}
+  constructor(
+    private configService: ConfigService,
+    private authService: AuthService,
+  ) {}
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(request);
 
-    const POKEMON_TOKEN = this.configService.get<string>('POKEMON_TOKEN_SECRET');
+    if (!token) return false;
+    const validateSignedToken = this.authService.validateSignedToken(token);
 
-    if (!token || token !== POKEMON_TOKEN) {
+    if (!validateSignedToken) {
       throw new UnauthorizedException('Token inválido');
     }
 
+    // return true;
     return true;
   }
 

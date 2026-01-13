@@ -20,7 +20,7 @@ import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { PokemonNameParamDto } from './dto/nameparam-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
-import { PokemonAuthGuard } from '../pokemon-auth/pokemon-auth.guard';
+import { PokemonAuthGuard } from '../auth/guards/pokemon-auth.guard';
 
 @ApiTags('Pokémon')
 @Controller('pokemon')

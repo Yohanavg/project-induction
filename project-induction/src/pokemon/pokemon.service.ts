@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { PokemonRepositoryService } from './pokemonRepository.service';
@@ -14,6 +14,7 @@ import { mapPokeApiToCreatePokemonDto } from './adapters/pokeapi.mapper';
 
 @Injectable()
 export class PokemonService {
+  private readonly logger = new Logger('Aleicer');
   constructor(
     private readonly httpService: HttpService,
     private readonly pokemonRepository: PokemonRepositoryService,
