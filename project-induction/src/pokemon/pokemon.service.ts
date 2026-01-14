@@ -64,7 +64,6 @@ export class PokemonService {
         ? [arr.slice(0, size), ...chunkArray(arr.slice(size), size)]
         : [arr];
 
-    // Process in chunks of 50 to avoid rate limits/timeouts
     const chunks = chunkArray(data.results, 50);
 
     for (const chunk of chunks) {

@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StatsModule } from './stats/stats.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { BuscalibreModule } from './buscalibre/buscalibre.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { UsersModule } from './users/users.module';
     StatsModule,
     AuthModule,
     UsersModule,
+    BuscalibreModule,
   ],
   controllers: [],
   providers: [],
