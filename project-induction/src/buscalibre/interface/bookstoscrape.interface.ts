@@ -1,4 +1,4 @@
-export interface BuscalibreInterface {
+export interface BooksToScrapeInterface {
   title: string;
   price: number;
   image: string;
