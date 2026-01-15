@@ -5,7 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StatsModule } from './stats/stats.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { BuscalibreModule } from './buscalibre/bookstoscrape.module';
+import { BuscalibreModule } from './booksToScrape/bookstoscrape.module';
+import { KtronixModule } from './ktronix/ktronix.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { BuscalibreModule } from './buscalibre/bookstoscrape.module';
     AuthModule,
     UsersModule,
     BuscalibreModule,
+    KtronixModule,
   ],
   controllers: [],
   providers: [],
